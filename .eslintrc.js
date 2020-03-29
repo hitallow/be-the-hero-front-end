@@ -23,6 +23,6 @@ module.exports = {
   plugins: ['react', 'prettier'],
   rules: {
     //   mostra as regras do prettierrc como erros
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'error',
   }
 };

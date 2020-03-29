@@ -1,9 +1,9 @@
-import React from "react";
-import "./styles.css";
-import { FiLogIn } from "react-icons/fi";
+import React from 'react';
+import './styles.css';
+import { FiLogIn } from 'react-icons/fi';
 
-import heroImage from "../../assets/heroes.png";
-import logoImage from "../../assets/logo.svg";
+import heroImage from '../../assets/heroes.png';
+import logoImage from '../../assets/logo.svg';
 
 export default function Logon() {
   return (

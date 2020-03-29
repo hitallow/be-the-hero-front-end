@@ -1,10 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import logoImage from '../../assets/logo.svg';
 import { FiArrowLeft } from 'react-icons/fi';
+import api from '../../services/api';
 import './styles.css';
 
 export default function Register() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [whatsapp, setWhatsApp] = useState('');
+  const [city, setCity] = useState('');
+  const [UF, setUF] = useState('');
+  const history = useHistory();
+  // função responsável por capturar as informações e enviar para o backend
+  async function handleRegister(e) {
+    e.preventDefault();
+    const values = {
+      name,
+      email,
+      whatsapp,
+      city,
+      uf: UF,
+    };
+    try {
+      const response = await api.post('ongs', values);
+      alert(`Seu ID de acesso é : ${response.data.id}`);
+      history.push('/');
+    } catch (err) {
+      alert('Erro, tente novamente');
+    }
+  }
   return (
     <div className="register-container">
       <div className="content">
@@ -20,14 +45,34 @@ export default function Register() {
             Voltar para logon
           </Link>
         </section>
-        <form>
-          <input placeholder="Nome da ONG" />
-          <input type="email" placeholder="E-mail" />
+        <form onSubmit={handleRegister}>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Nome da ONG"
+          />
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="E-mail"
+          />
 
-          <input placeholder="Whatsapp" />
+          <input
+            placeholder="Whatsapp"
+            value={whatsapp}
+            onChange={(e) => setWhatsApp(e.target.value)}
+          />
           <div className="input-group">
-            <input type="text" placeholder="Cidade" />
             <input
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              type="text"
+              placeholder="Cidade"
+            />
+            <input
+              value={UF}
+              onChange={(e) => setUF(e.target.value)}
               type="text"
               placeholder="UF"
               style={{
